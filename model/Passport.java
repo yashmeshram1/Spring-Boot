@@ -14,6 +14,9 @@ import javax.persistence.Table;
 @Table(name = "passport")
 public class Passport {
   // Write your code here
+  //working
+
+
 
   @Id
   @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -64,6 +67,8 @@ public class Passport {
 
   
 
+
+for)int i
   
 
 
