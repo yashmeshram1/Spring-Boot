@@ -1,0 +1,32 @@
+package com.day20session1que2.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.day20session1que2.model.Passport;
+import com.day20session1que2.model.Person;
+import com.day20session1que2.repository.PersonRepository;
+
+@Service
+public class PersonService {
+    
+    // Write your code here
+    @Autowired
+    private PersonRepository personRepository;
+
+    public Person savePerson(Person person)
+   {
+     return personRepository.save(person);
+   }
+   public void deletePersonById(Long id)
+   {
+      personRepository.deleteById(id);
+   }
+   public List<Person> getAllPersons()
+   {
+      return personRepository.findAll();
+   }
+}
+

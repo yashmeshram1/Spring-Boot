@@ -1,0 +1,52 @@
+package com.day20session1que2.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.day20session1que2.model.Passport;
+import com.day20session1que2.service.PassportService;
+
+@RestController
+@RequestMapping("/passports")
+public class PassportController 
+{
+   // Write your code here
+   @Autowired
+   private PassportService passportService;
+
+   @PostMapping
+  public ResponseEntity<Passport> createPassport(@RequestBody Passport passport)
+  {
+   return new ResponseEntity<>(passportService.savePassport(passport),HttpStatus.CREATED);
+     
+  }
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deletePassport(@PathVariable Long id)
+  {
+      passportService.deletePassportById(id);
+      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
+
+  @GetMapping
+  public ResponseEntity<List<Passport>> getAllPassports()
+  {
+   return new ResponseEntity<>(passportService.getAllPassports(),HttpStatus.OK);
+  }
+
+  @PostMapping("/assign-person")
+  public ResponseEntity<Passport> assignPersonToPassport(@RequestParam Long passportId,@RequestParam Long personId)
+{
+   return new ResponseEntity<>(passportService.assignPersonToPassport(passportId, personId),HttpStatus.OK);
+}
+}
